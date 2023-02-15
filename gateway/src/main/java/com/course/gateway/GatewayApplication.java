@@ -18,6 +18,6 @@ public class GatewayApplication {
 		Environment env = app.run(args).getEnvironment();
 		LOG.info("启动成功！！");
 		LOG.info("Gateway地址: \thttp://127.0.0.1:{}", env.getProperty("server.port"));
-		System.out.println("测试回退1234");
+		System.out.println("测试回退12345");
 	}
 }
