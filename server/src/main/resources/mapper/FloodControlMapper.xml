@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.course.server.mapper.FloodControlMapper">
+  <resultMap id="BaseResultMap" type="com.course.server.domain.FloodControl">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="hidden_danger" jdbcType="VARCHAR" property="hiddenDanger" />
+    <result column="responsible_unit" jdbcType="VARCHAR" property="responsibleUnit" />
+    <result column="contact_person" jdbcType="VARCHAR" property="contactPerson" />
+    <result column="contact_phone" jdbcType="VARCHAR" property="contactPhone" />
+    <result column="self_check" jdbcType="VARCHAR" property="selfCheck" />
+    <result column="leadership" jdbcType="VARCHAR" property="leadership" />
+    <result column="leadership_phone" jdbcType="VARCHAR" property="leadershipPhone" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, hidden_danger, responsible_unit, contact_person, contact_phone, self_check, leadership, 
+    leadership_phone
+  </sql>
+  <select id="selectByExample" parameterType="com.course.server.domain.FloodControlExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_data_flood_control
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_data_flood_control
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_data_flood_control
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.course.server.domain.FloodControlExample">
+    delete from t_data_flood_control
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.course.server.domain.FloodControl">
+    insert into t_data_flood_control (id, hidden_danger, responsible_unit, 
+      contact_person, contact_phone, self_check, 
+      leadership, leadership_phone)
+    values (#{id,jdbcType=INTEGER}, #{hiddenDanger,jdbcType=VARCHAR}, #{responsibleUnit,jdbcType=VARCHAR}, 
+      #{contactPerson,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, #{selfCheck,jdbcType=VARCHAR}, 
+      #{leadership,jdbcType=VARCHAR}, #{leadershipPhone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.course.server.domain.FloodControl">
+    insert into t_data_flood_control
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="hiddenDanger != null">
+        hidden_danger,
+      </if>
+      <if test="responsibleUnit != null">
+        responsible_unit,
+      </if>
+      <if test="contactPerson != null">
+        contact_person,
+      </if>
+      <if test="contactPhone != null">
+        contact_phone,
+      </if>
+      <if test="selfCheck != null">
+        self_check,
+      </if>
+      <if test="leadership != null">
+        leadership,
+      </if>
+      <if test="leadershipPhone != null">
+        leadership_phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="hiddenDanger != null">
+        #{hiddenDanger,jdbcType=VARCHAR},
+      </if>
+      <if test="responsibleUnit != null">
+        #{responsibleUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPerson != null">
+        #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null">
+        #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="selfCheck != null">
+        #{selfCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="leadership != null">
+        #{leadership,jdbcType=VARCHAR},
+      </if>
+      <if test="leadershipPhone != null">
+        #{leadershipPhone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.course.server.domain.FloodControlExample" resultType="java.lang.Long">
+    select count(*) from t_data_flood_control
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_data_flood_control
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.hiddenDanger != null">
+        hidden_danger = #{record.hiddenDanger,jdbcType=VARCHAR},
+      </if>
+      <if test="record.responsibleUnit != null">
+        responsible_unit = #{record.responsibleUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactPerson != null">
+        contact_person = #{record.contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactPhone != null">
+        contact_phone = #{record.contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.selfCheck != null">
+        self_check = #{record.selfCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leadership != null">
+        leadership = #{record.leadership,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leadershipPhone != null">
+        leadership_phone = #{record.leadershipPhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_data_flood_control
+    set id = #{record.id,jdbcType=INTEGER},
+      hidden_danger = #{record.hiddenDanger,jdbcType=VARCHAR},
+      responsible_unit = #{record.responsibleUnit,jdbcType=VARCHAR},
+      contact_person = #{record.contactPerson,jdbcType=VARCHAR},
+      contact_phone = #{record.contactPhone,jdbcType=VARCHAR},
+      self_check = #{record.selfCheck,jdbcType=VARCHAR},
+      leadership = #{record.leadership,jdbcType=VARCHAR},
+      leadership_phone = #{record.leadershipPhone,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.course.server.domain.FloodControl">
+    update t_data_flood_control
+    <set>
+      <if test="hiddenDanger != null">
+        hidden_danger = #{hiddenDanger,jdbcType=VARCHAR},
+      </if>
+      <if test="responsibleUnit != null">
+        responsible_unit = #{responsibleUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPerson != null">
+        contact_person = #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null">
+        contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="selfCheck != null">
+        self_check = #{selfCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="leadership != null">
+        leadership = #{leadership,jdbcType=VARCHAR},
+      </if>
+      <if test="leadershipPhone != null">
+        leadership_phone = #{leadershipPhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.course.server.domain.FloodControl">
+    update t_data_flood_control
+    set hidden_danger = #{hiddenDanger,jdbcType=VARCHAR},
+      responsible_unit = #{responsibleUnit,jdbcType=VARCHAR},
+      contact_person = #{contactPerson,jdbcType=VARCHAR},
+      contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      self_check = #{selfCheck,jdbcType=VARCHAR},
+      leadership = #{leadership,jdbcType=VARCHAR},
+      leadership_phone = #{leadershipPhone,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
